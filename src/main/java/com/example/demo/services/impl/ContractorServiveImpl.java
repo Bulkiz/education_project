@@ -45,6 +45,7 @@ public class ContractorServiveImpl implements ContractorService{
 	public ContractorServiveImpl(ContractorRepository contractorRepository, AddressRepository addressRepository,
 			BankAccountRepository bankAccountRepository, ContractorMapper contractorMapper, ContactRepository contactRepository, 
 			FacilityRepository facilityRepository) {
+		
 		this.contractorRepository = contractorRepository;
 		this.addressRepository = addressRepository;
 		this.bankAccountRepository = bankAccountRepository;

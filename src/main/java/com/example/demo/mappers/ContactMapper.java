@@ -9,35 +9,32 @@ import com.example.demo.dtos.ContactDTO;
 import com.example.demo.entities.Contact;
 
 @Component
-public class ContactMapper {
-	
+public class ContactMapper implements ModelMapper<ContactDTO, Contact> {
 	
 	public ContactDTO toDto(Contact contact) {
-		
-		ContactDTO contactDTO = new ContactDTO();
-		contactDTO.setId(contact.getId());
-		contactDTO.setName(contact.getName());
-		contactDTO.setContactType(contact.getContactType());
-		contactDTO.setDepartment(contact.getDepartment());
-		contactDTO.setPhoneNumber(contact.getPhoneNumber());
-		contactDTO.setEmail(contact.getEmail());
-		contactDTO.setIsActive(contact.getIsActive());
-		
-		return contactDTO;
+
+		return ContactDTO.builder().
+				id(contact.getId()).
+				name(contact.getName()).
+				contactType(contact.getContactType()).
+				department(contact.getDepartment()).
+				phoneNumber(contact.getPhoneNumber()).
+				email(contact.getEmail()).
+				isActive(contact.getIsActive()).
+				build();
 	}
 	
 	public Contact toEntity(ContactDTO contactDTO) {
 		
-		Contact contact = new Contact();
-		contact.setId(contactDTO.getId()); 
-		contact.setName(contactDTO.getName());
-		contact.setContactType(contactDTO.getContactType());
-		contact.setDepartment(contactDTO.getDepartment());
-		contact.setPhoneNumber(contactDTO.getPhoneNumber());
-		contact.setEmail(contactDTO.getEmail());
-		contact.setIsActive(contactDTO.getIsActive());
-		
-		return contact;
+		return Contact.builder().
+				id(contactDTO.getId()).
+				name(contactDTO.getName()).
+				contactType(contactDTO.getContactType()).
+				department(contactDTO.getDepartment()).
+				phoneNumber(contactDTO.getPhoneNumber()).
+				email(contactDTO.getEmail()).
+				isActive(contactDTO.getIsActive()).
+				build();
 	}
 	
 	public List<ContactDTO> allToDtos(List<Contact> contacts) {
@@ -45,13 +42,9 @@ public class ContactMapper {
 		return contacts.stream().map(x -> toDto(x)).collect(Collectors.toList());
 	}
 	
-	public List<Contact> allToEntity(List<ContactDTO> contactDTOs) {
+	public List<Contact> allToEntities(List<ContactDTO> contactDTOs) {
 		
 		return contactDTOs.stream().map(x -> toEntity(x)).collect(Collectors.toList());
 	}
-	
-
-	
-	
 	
 }

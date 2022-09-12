@@ -25,9 +25,9 @@ public class AppExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handle() {
+	public String handle() {
 		return "Unknown error ocurred";
-    }
+	}
 	
 	
 }

@@ -10,37 +10,34 @@ import com.example.demo.dtos.FacilityDTO;
 import com.example.demo.entities.Facility;
 
 @Component
-public class FacilityMapper {
+public class FacilityMapper implements ModelMapper<FacilityDTO,	Facility> {
 	
 	@Autowired private AddressMapper addressMapper;
 	
-	@Autowired
-	ContactMapper contactMapper;
+	@Autowired private ContactMapper contactMapper;
 
 	public FacilityDTO toDto(Facility facility) {
 		
-		FacilityDTO facilityDTO = new FacilityDTO();
-		facilityDTO.setId(facility.getId());
-		facilityDTO.setCode(facility.getCode());
-		facilityDTO.setName(facility.getName());
-		facilityDTO.setIsActive(facility.getIsActive());
-		facilityDTO.setFacilityAddress(addressMapper.toDto(facility.getFacilityAddress()));
-		facilityDTO.setContacts(contactMapper.allToDtos(facility.getContacts()));
-		
-		return facilityDTO;
+		return FacilityDTO.builder().
+				id(facility.getId()).
+				code(facility.getCode()).
+				name(facility.getName()).
+				isActive(facility.getIsActive()).
+				facilityAddress(addressMapper.toDto(facility.getFacilityAddress())).
+				contacts(contactMapper.allToDtos(facility.getContacts())).
+				build();
 	}
 	
 	public Facility toEntity(FacilityDTO facilityDTO) {
-		
-		Facility facility = new Facility();
-		facility.setId(facilityDTO.getId());
-		facility.setCode(facilityDTO.getCode());
-		facility.setName(facilityDTO.getName());
-		facility.setIsActive(facilityDTO.getIsActive());
-		facility.setFacilityAddress(addressMapper.toEntity(facilityDTO.getFacilityAddress()));
-		facility.setContacts(contactMapper.allToEntity(facilityDTO.getContacts()));
-		
-		return facility;
+
+		return Facility.builder().
+				id(facilityDTO.getId()).
+				code(facilityDTO.getCode()).
+				name(facilityDTO.getName()).
+				isActive(facilityDTO.getIsActive()).
+				facilityAddress(addressMapper.toEntity(facilityDTO.getFacilityAddress())).
+				contacts(contactMapper.allToEntities(facilityDTO.getContacts())).
+				build();
 	}
 	
 	public List<FacilityDTO> allToDtos(List<Facility> facilities) {
@@ -52,12 +49,5 @@ public class FacilityMapper {
 		
 		return facilityDTOs.stream().map(x -> toEntity(x)).collect(Collectors.toList());
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

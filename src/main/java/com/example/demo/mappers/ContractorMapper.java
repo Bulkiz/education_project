@@ -11,62 +11,69 @@ import com.example.demo.entities.Contractor;
 
 
 @Component
-public class ContractorMapper {
+public class ContractorMapper implements ModelMapper<ContractorDTO, Contractor> {
 	
-	@Autowired private AddressMapper addressMapper;
+	private AddressMapper addressMapper;
 	
-	@Autowired private BankAccountMapper bankAccountMapper;
+	private BankAccountMapper bankAccountMapper;
 	
-	@Autowired private ContactMapper contactMapper;
+	private ContactMapper contactMapper;
 	
-	@Autowired private FacilityMapper facilityMapper;
+	private FacilityMapper facilityMapper;
+	
+	@Autowired
+	public ContractorMapper(AddressMapper addressMapper, BankAccountMapper bankAccountMapper, 
+			ContactMapper contactMapper, FacilityMapper facilityMapper) {
+		this.facilityMapper = facilityMapper;
+		this.addressMapper = addressMapper;
+		this.bankAccountMapper = bankAccountMapper;
+		this.contactMapper = contactMapper;
+	}
 	
 	public ContractorDTO toDto(Contractor contractor) {
-		
-		ContractorDTO contractorDTO = new ContractorDTO();
-		contractorDTO.setId(contractor.getId());
-		contractorDTO.setCode(contractor.getCode());
-		contractorDTO.setName(contractor.getName());
-		contractorDTO.setIsActive(contractor.getIsActive());
-		contractorDTO.setRegistrationTime(contractor.getRegistrationTime());
-		contractorDTO.setCorrespondenceAddress(addressMapper.toDto(contractor.getCorrespondenceAddress()));
-		contractorDTO.setContractorType(contractor.getContractorType());
-		contractorDTO.setLegalType(contractor.getLegalType());
-		contractorDTO.setPin(contractor.getPin());
-		contractorDTO.setRegistrationAddress(addressMapper.toDto(contractor.getRegistrationAddress()));
-		contractorDTO.setUic(contractor.getUic());
-		contractorDTO.setVat(contractor.getVat());
-		contractorDTO.setInvoiceAddress(addressMapper.toDto(contractor.getInvoiceAddress()));
-		contractorDTO.setResponsibleOfficial(contractor.getResponsibleOfficial());
-		contractorDTO.setContacts(contactMapper.allToDtos(contractor.getContacts()));
-		contractorDTO.setBankAccounts(bankAccountMapper.allToDtos(contractor.getBankAccounts()));
-		contractorDTO.setFacilities(facilityMapper.allToDtos(contractor.getFacilities()));
-	
-		
-		return contractorDTO;
+
+		return ContractorDTO.builder().
+				id(contractor.getId()).
+				code(contractor.getCode()).
+				name(contractor.getName()).
+				isActive(contractor.getIsActive()).
+				registrationTime(contractor.getRegistrationTime()).
+				correspondenceAddress(addressMapper.toDto(contractor.getCorrespondenceAddress())).
+				contractorType(contractor.getContractorType()).
+				legalType(contractor.getLegalType()).
+				pin(contractor.getPin()).
+				registrationAddress(addressMapper.toDto(contractor.getRegistrationAddress())).
+				uic(contractor.getUic()).
+				vat(contractor.getVat()).
+				invoiceAddress(addressMapper.toDto(contractor.getInvoiceAddress())).
+				responsibleOfficial(contractor.getResponsibleOfficial()).
+				contacts(contactMapper.allToDtos(contractor.getContacts())).
+				bankAccounts(bankAccountMapper.allToDtos(contractor.getBankAccounts())).
+				facilities(facilityMapper.allToDtos(contractor.getFacilities())).
+				build();
 	}
 	
 	public Contractor toEntity(ContractorDTO contractorDto) {
-		Contractor contractor = new Contractor();
-		
-		contractor.setId(contractorDto.getId());
-		contractor.setCode(contractorDto.getCode());
-		contractor.setName(contractorDto.getName());
-		contractor.setIsActive(contractorDto.getIsActive());
-		contractor.setRegistrationTime(contractorDto.getRegistrationTime());
-		contractor.setCorrespondenceAddress(addressMapper.toEntity(contractorDto.getCorrespondenceAddress()));
-		contractor.setContractorType(contractorDto.getContractorType());
-		contractor.setLegalType(contractorDto.getLegalType());
-		contractor.setPin(contractorDto.getPin());
-		contractor.setRegistrationAddress(addressMapper.toEntity(contractorDto.getRegistrationAddress()));
-		contractor.setUic(contractorDto.getUic());
-		contractor.setVat(contractorDto.getVat());
-		contractor.setInvoiceAddress(addressMapper.toEntity(contractorDto.getInvoiceAddress()));
-		contractor.setResponsibleOfficial(contractorDto.getResponsibleOfficial());
-		contractor.setContacts(contactMapper.allToEntity(contractorDto.getContacts()));
-		contractor.setBankAccounts(bankAccountMapper.allToEntity(contractorDto.getBankAccounts()));
-		contractor.setFacilities(facilityMapper.allToEntities(contractorDto.getFacilities()));
-		return contractor; 
+
+		return Contractor.builder().
+				id(contractorDto.getId()).
+				code(contractorDto.getCode()).
+				name(contractorDto.getName()).
+				isActive(contractorDto.getIsActive()).
+				registrationTime(contractorDto.getRegistrationTime()).
+				correspondenceAddress(addressMapper.toEntity(contractorDto.getCorrespondenceAddress())).
+				contractorType(contractorDto.getContractorType()).
+				legalType(contractorDto.getLegalType()).
+				pin(contractorDto.getPin()).
+				registrationAddress(addressMapper.toEntity(contractorDto.getRegistrationAddress())).
+				uic(contractorDto.getUic()).
+				vat(contractorDto.getVat()).
+				invoiceAddress(addressMapper.toEntity(contractorDto.getInvoiceAddress())).
+				responsibleOfficial(contractorDto.getResponsibleOfficial()).
+				contacts(contactMapper.allToEntities(contractorDto.getContacts())).
+				bankAccounts(bankAccountMapper.allToEntities(contractorDto.getBankAccounts())).
+				facilities(facilityMapper.allToEntities(contractorDto.getFacilities())).
+				build(); 
 	}
 	
 	public List<ContractorDTO> allToDtos(List<Contractor> contractors) {
@@ -78,6 +85,8 @@ public class ContractorMapper {
 		
 		return contractorDtos.stream().map(x -> (toEntity(x))).collect(Collectors.toList());
 	}
+
+	
 	
 
 }

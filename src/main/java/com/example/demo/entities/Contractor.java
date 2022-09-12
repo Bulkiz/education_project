@@ -17,12 +17,16 @@ import javax.persistence.Table;
 import com.example.demo.enums.ContractorType;
 import com.example.demo.enums.LegalType;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity

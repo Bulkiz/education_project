@@ -9,28 +9,26 @@ import com.example.demo.dtos.CurrencyDTO;
 import com.example.demo.entities.Currency;
 
 @Component
-public class CurrencyMapper {
+public class CurrencyMapper implements ModelMapper<CurrencyDTO, Currency> {
 	
 	public CurrencyDTO toDto(Currency currency) {
 		
-		CurrencyDTO currencyDTO = new CurrencyDTO();
-		currencyDTO.setId(currency.getId());
-		currencyDTO.setName(currency.getName());
-		currencyDTO.setCode(currency.getCode());
-		currencyDTO.setIsActive(currency.getIsActive());
-		
-		return currencyDTO;
+		return CurrencyDTO.builder().
+				id(currency.getId()).
+				name(currency.getName()).
+				code(currency.getCode()).
+				isActive(currency.getIsActive()).
+				build();
 	}
 	
 	public Currency toEntity(CurrencyDTO currencyDTO) {
 		
-		Currency currency = new Currency();
-		currency.setId(currencyDTO.getId());
-		currency.setName(currencyDTO.getName());
-		currency.setCode(currencyDTO.getCode());
-		currency.setIsActive(currencyDTO.getIsActive());
-		
-		return currency;
+		return Currency.builder().
+				id(currencyDTO.getId()).
+				name(currencyDTO.getName()).
+				code(currencyDTO.getCode()).
+				isActive(currencyDTO.getIsActive()).
+				build();
 	}
 	
 	public List<CurrencyDTO> allToDtos(List<Currency> currencies) {
@@ -38,9 +36,10 @@ public class CurrencyMapper {
 		return currencies.stream().map(currency -> toDto(currency)).collect(Collectors.toList());
 	}
 	
-	public List<Currency> allToEntity(List<CurrencyDTO> currencyDTOs) {
+	public List<Currency> allToEntities(List<CurrencyDTO> currencyDTOs) {
 		
 		return currencyDTOs.stream().map(currency -> toEntity(currency)).collect(Collectors.toList());
 	}
+
 
 }

@@ -10,36 +10,34 @@ import com.example.demo.dtos.BankAccountDTO;
 import com.example.demo.entities.BankAccount;
 
 @Component
-public class BankAccountMapper {
+public class BankAccountMapper implements ModelMapper<BankAccountDTO, BankAccount>{
 	
 	@Autowired private CurrencyMapper currencyMapper;
 	
 	public BankAccountDTO toDto(BankAccount bankAccount) {
-		
-		BankAccountDTO bankAccountDTO = new BankAccountDTO();
-		bankAccountDTO.setId(bankAccount.getId());
-		bankAccountDTO.setName(bankAccount.getName());
-		bankAccountDTO.setSwift(bankAccount.getSwift());
-		bankAccountDTO.setIban(bankAccount.getIban());
-		bankAccountDTO.setCurrency(currencyMapper.toDto(bankAccount.getCurrency()));
-		bankAccountDTO.setAddress(bankAccount.getAddress());
-		bankAccountDTO.setIsActive(bankAccount.getIsActive());
-		
-		return bankAccountDTO;
+	
+		return BankAccountDTO.builder().
+				id(bankAccount.getId()).
+				name(bankAccount.getName()).
+				swift(bankAccount.getSwift()).
+				iban(bankAccount.getIban()).
+				currency(currencyMapper.toDto(bankAccount.getCurrency())).
+				address(bankAccount.getAddress()).
+				isActive(bankAccount.getIsActive()).
+				build();
 	}
 	
 	public BankAccount toEntity(BankAccountDTO bankAccountDTO) {
-		
-		BankAccount bankAccount = new BankAccount();
-		bankAccount.setId(bankAccountDTO.getId());
-		bankAccount.setName(bankAccountDTO.getName());
-		bankAccount.setSwift(bankAccountDTO.getSwift());
-		bankAccount.setIban(bankAccountDTO.getIban());
-		bankAccount.setCurrency(currencyMapper.toEntity(bankAccountDTO.getCurrency()));
-		bankAccount.setAddress(bankAccountDTO.getAddress());
-		bankAccount.setIsActive(bankAccountDTO.getIsActive());
-		
-		return bankAccount;
+
+		return BankAccount.builder().
+				id(bankAccountDTO.getId()).
+				name(bankAccountDTO.getName()).
+				swift(bankAccountDTO.getSwift()).
+				iban(bankAccountDTO.getIban()).
+				currency(currencyMapper.toEntity(bankAccountDTO.getCurrency())).
+				address(bankAccountDTO.getAddress()).
+				isActive(bankAccountDTO.getIsActive()).
+				build();
 	}
 	
 	public List<BankAccountDTO> allToDtos(List<BankAccount> bankAccounts) {
@@ -47,7 +45,7 @@ public class BankAccountMapper {
 		return bankAccounts.stream().map(x -> toDto(x)).collect(Collectors.toList());
 	}
 	
-	public List<BankAccount> allToEntity(List<BankAccountDTO> bankAccountDTOs) {
+	public List<BankAccount> allToEntities(List<BankAccountDTO> bankAccountDTOs) {
 		
 		return bankAccountDTOs.stream().map(x -> toEntity(x)).collect(Collectors.toList());
 	}

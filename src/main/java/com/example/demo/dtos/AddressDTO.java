@@ -6,13 +6,13 @@ import javax.validation.constraints.Size;
 
 import com.example.demo.enums.AddressType;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 public class AddressDTO {
 	
 

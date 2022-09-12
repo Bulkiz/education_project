@@ -44,7 +44,7 @@ public class NomenclatureServiceImpl implements NomenclatureService{
 	@Override
 	public List<CountryDTO> getCountries() {
 	
-		return countryMapper.allToDto(countryRepository.findAll());
+		return countryMapper.allToDtos(countryRepository.findAll());
 	}
 
 	@Override

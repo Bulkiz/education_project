@@ -9,34 +9,32 @@ import com.example.demo.dtos.CountryDTO;
 import com.example.demo.entities.Country;
 
 @Component
-public class CountryMapper {
+public class CountryMapper implements ModelMapper<CountryDTO, Country>{
 	
 	public CountryDTO toDto(Country country) {
-		
-		CountryDTO countryDTO = new CountryDTO();
-		countryDTO.setId(country.getId());
-		countryDTO.setName(country.getName());
-		countryDTO.setIsActive(country.getIsActive());
-		
-		return countryDTO;
+
+		return CountryDTO.builder().
+				id(country.getId()).
+				name(country.getName()).
+				isActive(country.getIsActive()).
+				build();
 	}
 	
 	public Country toEntity(CountryDTO countryDTO) {
-		
-		 Country country = new Country();
-		 country.setId(countryDTO.getId());
-		 country.setName(countryDTO.getName());
-		 country.setIsActive(countryDTO.getIsActive());
-		 
-		 return country;
+	
+		 return Country.builder().
+				 id(countryDTO.getId()).
+				 name(countryDTO.getName()).
+				 isActive(countryDTO.getIsActive()).
+				 build();
 	}
 	
-	public List<CountryDTO> allToDto(List<Country> countries) {
+	public List<CountryDTO> allToDtos(List<Country> countries) {
 		
 		return countries.stream().map(country -> toDto(country)).collect(Collectors.toList());
 	}
 	
-	public List<Country> allToEntity(List<CountryDTO> countryDTOs) {
+	public List<Country> allToEntities(List<CountryDTO> countryDTOs) {
 		
 		return countryDTOs.stream().map(country -> toEntity(country)).collect(Collectors.toList());
 	}
