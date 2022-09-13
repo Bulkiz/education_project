@@ -77,7 +77,7 @@ public class ContractorServiveImpl implements ContractorService{
 				isActive,
 				contractorType,
 				legalType, pin, pagingSort)
-				.map(contractor -> contractorMapper.toDtoInfo(contractor));
+				.map(contractor -> contractorMapper.toDtoBasicInfo(contractor));
 
 		return new PageCustom<>(contractorPage);
 	}
