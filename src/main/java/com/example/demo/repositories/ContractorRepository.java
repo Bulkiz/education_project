@@ -21,8 +21,7 @@ public interface ContractorRepository extends JpaRepository<Contractor, Integer>
 			+ "(e.isActive in (:isActive) or :isActive is null) and "
 			+ "(:contractorType is null or e.contractorType = :contractorType) and "
 			+ "(:legalType is null or e.legalType = :legalType) and "
-			+ "(:pin is null or cast( e.pin as text ) like concat (cast(:pin as text), '%')) and "
-			+ "(:uic is null or cast( e.uic as text ) like concat (cast(:uic as text), '%'))",
+			+ "(:pin is null or cast( e.pin as text ) like concat (cast(:pin as text), '%'))",
 			countQuery = ( "select count(e) from Contractor e where " 
 					+ "(:id is null or cast( e.id as text ) like concat (cast(:id as text), '%')) and "
 					+ "(:code is null or cast( e.code as text ) like concat (cast(:code as text), '%')) and "
@@ -30,15 +29,13 @@ public interface ContractorRepository extends JpaRepository<Contractor, Integer>
 					+ "(e.isActive in (:isActive) or :isActive is null) and "
 					+ "(:contractorType is null or e.contractorType = :contractorType) and "
 					+ "(:legalType is null or e.legalType = :legalType) and "
-					+ "(:pin is null or cast( e.pin as text ) like concat (cast(:pin as text), '%')) and "
-					+ "(:uic is null or cast( e.uic as text ) like concat (cast(:uic as text), '%'))"))
+					+ "(:pin is null or cast( e.pin as text ) like concat (cast(:pin as text), '%'))"))
 	public Page<Contractor> findAllPaged(@Param("id") Integer id,
 			@Param("code") String code,
 			@Param("name") String name, @Param("isActive") Boolean isActive,
 			@Param("contractorType") ContractorType contractorType,
 			@Param("legalType") LegalType legalType,
 			@Param("pin") String pin,
-			@Param("uic") String uic,
 			Pageable pageable);
 }
 

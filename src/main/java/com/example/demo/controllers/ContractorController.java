@@ -41,14 +41,13 @@ public class ContractorController {
 		@Parameter(description = "Type value for the contractor") @RequestParam(required = false) ContractorType contractorType,
 		@Parameter(description = "Legal type value for the contractor") @RequestParam(required = false) LegalType legalType,
 		@Parameter(description = "Personal identification number value for the contractor") @RequestParam(required = false) String pin,
-		@Parameter(description = "Bulstat value for the contractor") @RequestParam(required = false) String uic,
 		@Parameter(description = "Page number you want to access") @RequestParam(required = true) Integer page,
 		@Parameter(description = "Size of the page") @RequestParam(required = true) Integer size,
 		@Parameter(description = "Parameter you want to sort by") @RequestParam(defaultValue = "id") List<String> sortBy,
 		@Parameter(description = "Sort direction on which to sort") @RequestParam(defaultValue = "ASC") List<Sort.Direction> sortDirection
 	) {
 		PageCustom<ContractorDTO> contractorPage = contractorService.findAll(id, code, name, isActive, contractorType,
-				legalType, pin, uic, page, size, sortBy, sortDirection);
+				legalType, pin, page, size, sortBy, sortDirection);
 		
 		return ResponseEntity.ok(contractorPage);
 	}

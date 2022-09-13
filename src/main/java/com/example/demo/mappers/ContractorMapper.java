@@ -30,6 +30,19 @@ public class ContractorMapper implements ModelMapper<ContractorDTO, Contractor> 
 		this.contactMapper = contactMapper;
 	}
 	
+	public ContractorDTO toDtoInfo(Contractor contractor) {
+
+		return ContractorDTO.builder().
+				id(contractor.getId()).
+				code(contractor.getCode()).
+				name(contractor.getName()).
+				isActive(contractor.getIsActive()).
+				contractorType(contractor.getContractorType()).
+				legalType(contractor.getLegalType()).
+				pin(contractor.getPin()).
+				build();
+	}
+	
 	public ContractorDTO toDto(Contractor contractor) {
 
 		return ContractorDTO.builder().

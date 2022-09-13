@@ -12,7 +12,7 @@ import com.example.demo.utils.PageCustom;
 public interface ContractorService {
 	
 	public PageCustom<ContractorDTO> findAll(Integer id, String code, String name, Boolean isActive,
-			ContractorType contractorType, LegalType legalType, String pin, String uic, Integer page, Integer size,
+			ContractorType contractorType, LegalType legalType, String pin, Integer page, Integer size,
 			List<String> sortBys, List<Sort.Direction> sortDirections);
 	
 	public ContractorDTO saveContractor(ContractorDTO contractorDTO);

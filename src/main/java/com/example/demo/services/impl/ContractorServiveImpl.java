@@ -58,7 +58,7 @@ public class ContractorServiveImpl implements ContractorService{
 	@Override
 	public PageCustom<ContractorDTO> findAll(Integer id, String code, String name, Boolean isActive,
 			ContractorType contractorType,
-			LegalType legalType, String pin,String uic,
+			LegalType legalType, String pin,
 			Integer page, Integer size, List<String> sortBys,
 			List<Sort.Direction> sortDirections) {
 			
@@ -75,8 +75,8 @@ public class ContractorServiveImpl implements ContractorService{
 		Page<ContractorDTO> contractorPage = contractorRepository.findAllPaged(id, code, name,
 				isActive,
 				contractorType,
-				legalType, pin, uic, pagingSort)
-				.map(contractor -> contractorMapper.toDto(contractor));
+				legalType, pin, pagingSort)
+				.map(contractor -> contractorMapper.toDtoInfo(contractor));
 
 		return new PageCustom<>(contractorPage);
 	}
