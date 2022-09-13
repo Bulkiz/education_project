@@ -20,7 +20,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ContractorDTO {
-
+	
+	
 	private Integer id; 
 	@NotNull
 	@Size(max = 7)

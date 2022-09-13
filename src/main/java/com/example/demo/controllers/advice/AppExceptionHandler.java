@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.webjars.NotFoundException;
 
 @RestControllerAdvice
 public class AppExceptionHandler {
@@ -27,6 +28,12 @@ public class AppExceptionHandler {
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	public String handle() {
 		return "Unknown error ocurred";
+	}
+	
+	@ExceptionHandler(NotFoundException.class)
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	public String handleNotFoundById(NotFoundException exception) {
+		return exception.getMessage();
 	}
 	
 	

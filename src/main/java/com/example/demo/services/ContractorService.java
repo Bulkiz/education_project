@@ -18,5 +18,7 @@ public interface ContractorService {
 	public ContractorDTO saveContractor(ContractorDTO contractorDTO);
 	
 	public ContractorDTO updateContractor(ContractorDTO contractorDTO);
+
+	public ContractorDTO findById(Integer id);
 	
 }

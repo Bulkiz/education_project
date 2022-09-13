@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 import com.example.demo.dtos.ContractorDTO;
 import com.example.demo.entities.BankAccount;
@@ -83,6 +84,18 @@ public class ContractorServiveImpl implements ContractorService{
 	
 	@Transactional
 	@Override
+	public ContractorDTO findById(Integer id) {
+		try {
+			return contractorMapper.toDto(contractorRepository.findById(id).get());
+		} catch (Exception e) {
+			throw new NotFoundException("There is no contractor with provided id: " + id);
+		}
+		
+		
+	}
+	
+	@Transactional
+	@Override
 	public ContractorDTO saveContractor(ContractorDTO contractorDTO) {
 		Contractor contractor = contractorMapper.toEntity(contractorDTO);
 		contractor.getCorrespondenceAddress().setAddressType(AddressType.CORRESPONDENCE);
@@ -124,6 +137,10 @@ public class ContractorServiveImpl implements ContractorService{
 		
 		return saveContractor(contractorMapper.toDto(contractor));
 	}
+
+	
+	
+
 	
 	
 	

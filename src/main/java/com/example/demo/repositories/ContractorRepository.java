@@ -37,6 +37,7 @@ public interface ContractorRepository extends JpaRepository<Contractor, Integer>
 			@Param("legalType") LegalType legalType,
 			@Param("pin") String pin,
 			Pageable pageable);
+	
 }
 
 

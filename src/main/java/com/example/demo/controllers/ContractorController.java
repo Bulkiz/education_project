@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,6 +63,12 @@ public class ContractorController {
 	@Operation(summary = "Update contractor", description = "Update contractor's information by giving valid values", tags = "Contractor")
 	public ResponseEntity<ContractorDTO> updateContractor(@Valid @RequestBody ContractorDTO contractorDTO) {
 		return ResponseEntity.ok(contractorService.updateContractor(contractorDTO));
+	}
+	
+	@GetMapping("/{id}")
+	@Operation(summary = "Get contractor", description = "Get a single contractor by Id value", tags = "Contractor")
+	public ResponseEntity<ContractorDTO> findById(@Parameter(description = "Id value for the contractor") @PathVariable("id") Integer id){
+		return ResponseEntity.ok(contractorService.findById(id));
 	}
 	
 	
