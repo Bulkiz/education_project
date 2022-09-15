@@ -41,7 +41,7 @@ public class User {
 	private Boolean isActive;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Role> authorities;
+	private List<Role> roles;
 	
 	
 	
