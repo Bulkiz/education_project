@@ -1,6 +1,7 @@
 package com.example.demo.users.mappers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,16 +13,26 @@ import com.example.demo.users.entities.User;
 @Component
 public class UserMapper implements ModelMapper<UserDTO, User>{
 	
-	@Autowired private RoleMapper roleMapper;
+	@Autowired private AuthorityMapper authorityMapper;
+	
+	public User toEntityRegister(UserDTO userDTO) {
+		return User.builder().
+				id(userDTO.getId()).
+				username(userDTO.getUsername()).
+				password(userDTO.getPassword()).
+				email(userDTO.getEmail()).
+				build();
+	}
 	
 	@Override
 	public UserDTO toDto(User user) {
 		return UserDTO.builder().
 				id(user.getId()).
-				userName(user.getUserName()).
+				username(user.getUsername()).
 				password(user.getPassword()).
 				isActive(user.getIsActive()).
-				roles(roleMapper.allToDtos(user.getRoles())).
+				email(user.getEmail()).
+				authorities(authorityMapper.allToDtos(user.getAuthorities())).
 				build();
 	}
 
@@ -29,23 +40,23 @@ public class UserMapper implements ModelMapper<UserDTO, User>{
 	public User toEntity(UserDTO userDTO) {
 		return User.builder().
 				id(userDTO.getId()).
-				userName(userDTO.getUserName()).
+				username(userDTO.getUsername()).
 				password(userDTO.getPassword()).
 				isActive(userDTO.getIsActive()).
-				roles(roleMapper.allToEntities(userDTO.getRoles())).
+				email(userDTO.getEmail()).
+				authorities(authorityMapper.allToEntities(userDTO.getAuthorities())).
 				build();
 	}
 
 	@Override
-	public List<UserDTO> allToDtos(List<User> entities) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UserDTO> allToDtos(List<User> users) {
+		return users.stream().map(user -> toDto(user)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<User> allToEntities(List<UserDTO> dtos) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> allToEntities(List<UserDTO> userDTOs) {
+		return userDTOs.stream().map(user -> toEntity(user)).collect(Collectors.toList());
 	}
+	
 	
 }

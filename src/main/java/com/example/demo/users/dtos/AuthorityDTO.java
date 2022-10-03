@@ -9,12 +9,11 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class UserDTO {
+public class AuthorityDTO {
 	
 	private Integer id;
-	private String username;
-	private String password;
-	private Boolean isActive;
-	private String email;
-	private List<AuthorityDTO> authorities;
+	private String name;
+	private String type;
+	private String description;
+	private List<AuthorityDTO> inheritedAuthorityDTOs;
 }

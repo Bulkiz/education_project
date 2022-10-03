@@ -24,11 +24,11 @@ public class AppExceptionHandler {
 		return exceptionMapper;
 	}
 	
-	@ExceptionHandler(Exception.class)
-	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	public String handle() {
-		return "Unknown error ocurred";
-	}
+//	@ExceptionHandler(Exception.class)
+//	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+//	public String handle() {
+//		return "Unknown error occurred";
+//	}
 	
 	@ExceptionHandler(NotFoundException.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)

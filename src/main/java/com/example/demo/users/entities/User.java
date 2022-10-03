@@ -29,10 +29,10 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
-	@Column(name = "user_name")
-	private String userName;
+	@Column(name = "username")
+	private String username;
 	
 	@Column(name = "password")
 	private String password;
@@ -40,8 +40,11 @@ public class User {
 	@Column(name = "is_active")
 	private Boolean isActive;
 	
+	@Column(name = "email")
+	private String email;
+	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Role> roles;
+	private List<Authority> authorities;
 	
 	
 	
