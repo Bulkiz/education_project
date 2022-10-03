@@ -22,6 +22,8 @@ import com.example.demo.enums.ContractorType;
 import com.example.demo.enums.LegalType;
 import com.example.demo.services.ContractorService;
 import com.example.demo.utils.PageCustom;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,6 +34,7 @@ public class ContractorController {
 	
 	@Autowired private ContractorService contractorService;
 	
+	@JsonInclude(value = Include.NON_NULL)
 	@GetMapping
 	@Operation(summary = "Get all the contractors", description = "Find all contractors by search parameters", tags = "Contractor")
 	public ResponseEntity<PageCustom<ContractorDTO>> findAllPagedContractors(
